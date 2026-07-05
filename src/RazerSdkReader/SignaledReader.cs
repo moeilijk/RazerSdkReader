@@ -40,6 +40,9 @@ internal sealed class SignaledReader<T> : IDisposable where T : unmanaged
                 // hopefully this is a good compromise between
                 // performance and responsiveness.
                 await _eventWaitHandle!.WaitOneAsync(5000, _cts.Token);
+                // The emulator events are ManualReset: reset after every wake, or a writer that
+                // Sets without Resetting leaves the handle signaled and the loop busy-polls.
+                _eventWaitHandle!.Reset();
                 data = _reader!.Read();
                 Updated?.Invoke(this, in data);
             }
