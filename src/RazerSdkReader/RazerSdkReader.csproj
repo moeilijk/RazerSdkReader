@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <Version>2.2.0</Version>
+        <PackageId>Moeilijk.RazerSdkReader</PackageId>
+        <Version>2.3.0</Version>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -14,13 +15,13 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <Authors>Diogo Trindade</Authors>
+        <Authors>Diogo Trindade, cvdveer</Authors>
         <Company>Diogo Trindade</Company>
-        <Description>Reader for Razer's Chroma lighting</Description>
+        <Description>Reader for Razer's Chroma lighting. Maintained fork of diogotr7/RazerSdkReader: adds RestartReaders (survive Chroma service restarts) and a polling fallback for legacy Chroma SDK games.</Description>
         <Copyright>Copyright (c) 2023 Diogo Trindade</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/diogotr7/RazerSdkReader</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/diogotr7/RazerSdkReader</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/moeilijk/RazerSdkReader</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/moeilijk/RazerSdkReader</RepositoryUrl>
         <PackageTags>razer, chroma, sdk, reader, rgb, keyboard</PackageTags>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IncludeSymbols>true</IncludeSymbols>
