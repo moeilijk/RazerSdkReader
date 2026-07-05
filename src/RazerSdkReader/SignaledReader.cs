@@ -54,7 +54,7 @@ internal sealed class SignaledReader<T> : IDisposable where T : unmanaged
         }
     }
 
-    public void Dispose()
+    internal void Stop()
     {
         _cts?.Cancel();
         _task?.Wait();
@@ -62,6 +62,15 @@ internal sealed class SignaledReader<T> : IDisposable where T : unmanaged
         _task?.Dispose();
         _reader?.Dispose();
         _eventWaitHandle?.Dispose();
+        _cts = null;
+        _task = null;
+        _reader = null;
+        _eventWaitHandle = null;
+    }
+
+    public void Dispose()
+    {
+        Stop();
         Updated = null;
         _exceptionHandler = null;
     }

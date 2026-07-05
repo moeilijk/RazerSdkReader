@@ -143,6 +143,29 @@ public sealed class ChromaReader : IDisposable
         }
     }
 
+    public void RestartReaders()
+    {
+        if (_chromaMutex == null) return;
+
+        Action<object?, RazerSdkReaderException> onReaderException = (sender, e) => Exception?.Invoke(sender, e);
+
+        _appDataReader.Stop();
+        _keyboardReader.Stop();
+        _mouseReader.Stop();
+        _mousepadReader.Stop();
+        _keypadReader.Stop();
+        _headsetReader.Stop();
+        _chromaLinkReader.Stop();
+
+        if (EnableAppData) _appDataReader.Start(ReaderDefinitions.AppData, onReaderException);
+        if (EnableKeyboard) _keyboardReader.Start(ReaderDefinitions.Keyboard, onReaderException);
+        if (EnableMouse) _mouseReader.Start(ReaderDefinitions.Mouse, onReaderException);
+        if (EnableMousepad) _mousepadReader.Start(ReaderDefinitions.Mousepad, onReaderException);
+        if (EnableKeypad) _keypadReader.Start(ReaderDefinitions.Keypad, onReaderException);
+        if (EnableHeadset) _headsetReader.Start(ReaderDefinitions.Headset, onReaderException);
+        if (EnableChromaLink) _chromaLinkReader.Start(ReaderDefinitions.Link, onReaderException);
+    }
+
     private static void Subscribe<T>(bool enable, SignaledReader<T> store, InStructEventHandler<T>? value) where T : unmanaged
     {
         if (!enable) throw new InvalidOperationException($"{typeof(T).Name} is not enabled, this event will never fire.");
