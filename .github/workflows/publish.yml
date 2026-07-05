@@ -19,8 +19,11 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
+      - name: Build
+        run: dotnet build src/RazerSdkReader/RazerSdkReader.csproj -c Release
+
       - name: Pack
-        run: dotnet pack src/RazerSdkReader/RazerSdkReader.csproj -c Release -o out
+        run: dotnet pack src/RazerSdkReader/RazerSdkReader.csproj -c Release -o out --no-build
 
       - name: NuGet login (Trusted Publishing)
         uses: NuGet/login@v1
